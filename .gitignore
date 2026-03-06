@@ -1,0 +1,12 @@
+# simulation outputs
+*.vcd
+*.vvp
+*.out
+*.log
+
+# compiled simulator outputs
+pc
+a.out
+
+# editor files
+.vscode/
