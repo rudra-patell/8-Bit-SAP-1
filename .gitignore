@@ -4,9 +4,9 @@
 *.out
 *.log
 
-# compiled simulator outputs
-pc
-a.out
+# Simulation and Build artifacts
+sim/
+build/
 
 # editor files
 .vscode/
