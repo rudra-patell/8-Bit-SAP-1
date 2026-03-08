@@ -1,3 +1,3 @@
 //register B
-module REG_B ();
+module REG_B();
 endmodule
