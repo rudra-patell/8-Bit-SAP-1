@@ -1,16 +1,15 @@
-//register B
-module REG_B(
+module REG_out (
     input clk,
-    input clr,
-    input in_en,
+    input rst,
+    input load,
     input [7:0] data_in,
     output reg [7:0] data_out
 );
 
-    always @(posedge clk or posedge clr) begin
-        if (clr)
+    always @(posedge clk or posedge rst) begin
+        if (rst)
             data_out <= 8'b0;
-        else if (in_en)
+        else if (load)
             data_out <= data_in;
     end
 
