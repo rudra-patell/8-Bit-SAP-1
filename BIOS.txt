@@ -1,0 +1,13 @@
+// Format: Hexadecimal
+8A // Address 0: LDA 10 (Load value from addr 0xA)
+0B // Address 1: ADD 11 (Add value from addr 0xB)
+A0 // Address 2: OUT    (Display result)
+B0 // Address 3: HLT    (Stop)
+00 // Address 4: NOP...
+00 // ...
+00
+00
+00
+00
+05 // Address A (10): Data 5
+02 // Address B (11): Data 2

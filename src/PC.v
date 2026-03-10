@@ -9,6 +9,7 @@ module PC(
     output reg [7:0] data_out,
     output [7:0] bus //main output of the program counter to the bus
  );
+    
 
     always @(posedge clk or posedge rst) begin
         if(rst) begin

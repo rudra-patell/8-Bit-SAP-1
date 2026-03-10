@@ -11,7 +11,7 @@ SIM_DIR = sim
 BUILD_DIR = build
 
 # --- SINGLE RUN CONFIG ---
-TOP ?= pc_tb
+TOP ?= cpu_tb
 SRC_FILES := $(wildcard $(SRC_DIR)/*.v)
 TB_FILE := $(TB_DIR)/$(TOP).v
 
