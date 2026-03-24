@@ -3,10 +3,12 @@
 *.vvp
 *.out
 *.log
+*.history
 
 # Simulation and Build artifacts
 sim/
 build/
+output/
 
 # editor files
 .vscode/

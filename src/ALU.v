@@ -1,13 +1,14 @@
 //arithmetic and logic unit(ALU)
 module ALU (input [7:0] A, B, //8-bit inputs
             input [2:0] sel, //3-bit selector for operation
-            output reg [7:0] data_out, //result of the ALU operation
+            output wire[7:0] data_out, //result of the ALU operation
             input en_out,
             input rst, //reset signal for the ALU
             output reg[3:0] flags //flags will be implemented in future (oreder = Negative(Z), Zero(Z), Carry(C), Overflow(V))
             );
 
     reg [7:0] result; //internal register to hold the ALU result before output
+
 
 always @(*) begin
     case (sel)
@@ -26,8 +27,9 @@ always @(*) begin
         result = 8'b00000000; //Reset result to 0
     end
 
-    assign data_out = en_out ? result : 8'bz ;
+   
     //flags = 4'bXXXX; //flags will be implemented in future
 end
+    assign data_out = en_out ? result : 8'bz; //Output result to bus when enabled, otherwise high impedance
     
 endmodule

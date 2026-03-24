@@ -11,15 +11,11 @@ module RAM (
     integer i;
 
     initial begin
-        // 1. Clear memory
-        for (i = 0; i < 16; i = i + 1) begin
-            memory[i] = 8'h00;
-        end
 
-        // 2. Load from BIOS.txt
+        //Load from BIOS.txt
         $readmemh("src/BIOS.txt", memory);
 
-        // // 3. Hard-coded values (Backup in case file fails)
+        // //Hard-coded values (Backup in case file fails)
         // memory[0]  = 8'h8A; // LDA 10
         // memory[1]  = 8'h0B; // ADD 11
         // memory[2]  = 8'hA0; // OUT
