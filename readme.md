@@ -4,137 +4,105 @@
 
 This repository contains my implementation of an **8-bit computer based on the SAP-1 architecture** written in Verilog.
 
-I am an **EVD (Electronics with VLSI Design) student** exploring how processors are built at the hardware level. The goal of this project is to understand how a CPU works by **building one from scratch**, starting from a very simple architecture and gradually expanding it.
+I am an **Electronics with VLSI Design (EVD) student** exploring how processors are built at the hardware level. The goal of this project is to understand CPU design by **building one from scratch**, starting from a minimal architecture and expanding it step by step.
 
-The project begins with a minimal **SAP-1 (Simple-As-Possible) computer**, and then additional features will be implemented step by step to evolve it into a more capable processor.
-
-This repository is primarily a **learning and experimentation project**.
+This project is primarily focused on **learning, experimentation, and architectural understanding**.
 
 ---
 
 ## Goals of the Project
 
 * Understand **digital computer architecture from the hardware level**
-* Implement basic CPU components in **Verilog**
-* Learn how modules interact through **buses and control signals**
-* Simulate and debug designs using open-source tools
-* Gradually evolve a simple CPU into something more capable
+* Implement core CPU components in **Verilog**
+* Learn how modules interact via **buses and control signals**
+* Simulate and debug using **open-source tools**
+* Build a strong foundation for **VLSI and Design Verification**
 
 ---
 
-## Development Plan
+## SAP-1 Implementation
 
-The processor will be developed in stages:
-
-### Stage 1 — SAP-1 Implementation
-
-The initial goal is to implement the classic SAP-1 architecture including:
+This project implements the classic SAP-1 architecture with:
 
 * Program Counter (PC)
 * Memory Address Register (MAR)
 * RAM
 * Instruction Register (IR)
-* Accumulator (A register)
+* Accumulator (A Register)
 * B Register
-* ALU (Adder/Subtractor)
+* ALU (Arithmetic Logic Unit)
 * Output Register
-* Control Unit
+* Control Unit (hardwired)
 * Shared 8-bit system bus
 
-The processor will execute a minimal instruction set such as:
-
-* `LDA` – Load accumulator
-* `ADD` – Add memory value
-* `SUB` – Subtract memory value
-* `OUT` – Output accumulator
-* `HLT` – Halt execution
-
 ---
 
-### Stage 2 — Architectural Improvements
-
-After the basic SAP-1 works, the processor will gradually be extended with features such as:
-
-* Conditional jumps
-* Status flags (Zero, Carry, etc.)
-* Additional registers
-* Improved ALU operations
-* Better instruction encoding
-
----
-
-### Stage 3 — Toward a More Useful CPU
-
-Long-term improvements may include:
-
-* Larger memory
-* More instructions
-* Stack support
-* Subroutines
-* Basic I/O system
-* Possibly a simple assembler
-
-The goal is to move from **a teaching architecture to a small but practical CPU design**.
-
----
-
-## Project Structure
+## Instruction Set (Opcode Table)
 
 ```
-8-bit-SAP1/
-│
-├── src/        # Verilog modules (CPU hardware)
-├── tb/         # Simulation testbenches
-├── program/    # Memory initialization files
-├── docs/       # Notes and architecture documentation
-└── README.md
+0000 - ADD
+0001 - SUB
+0010 - AND
+0011 - OR
+0100 - XOR
+0101 - NOT
+0110 - Logical Left Shift
+0111 - Logical Right Shift
+1000 - LDA
+1001 - LDB
+1010 - OUT
+1011 - HLT
+1100 - NOP
+1101 - NOP
+1110 - NOP
+1111 - NOP
 ```
 
 ---
 
 ## Tools Used
 
-The project uses open-source digital design tools:
-
-* **Icarus Verilog** – simulation compiler
-* **vvp** – simulation runtime
-* **GTKWave** – waveform viewer
-
----
-
-## Why SAP-1?
-
-SAP-1 is a classic educational architecture that demonstrates the core ideas behind CPU design:
-
-* instruction fetch/decode/execute cycle
-* data buses
-* registers
-* ALU operations
-* control logic
-
-Because the design is intentionally simple, it is ideal for learning how processors work internally.
+* **Icarus Verilog** — simulation compiler
+* **vvp** — simulation runtime
+* **GTKWave** — waveform visualization
+* **Yosys** — open-source tool for schemetic generation
 
 ---
 
 ## Status
 
-🚧 Work in progress.
+✅ **Completed**
 
-The CPU is being built module by module. Each component will be implemented, simulated, and verified before integrating it into the full processor.
+The SAP-1 CPU has been fully implemented, simulated, and verified.
+All core modules are integrated and functioning as expected.
 
 ---
 
 ## Learning Focus
 
-This project is mainly about understanding:
+This project helped develop a strong understanding of:
 
-* digital system design
-* hardware description languages
-* datapath and control architecture
-* how real processors execute instructions
+* Digital system design
+* Datapath and control architecture
+* Instruction execution (fetch–decode–execute cycle)
+* Hardware description using Verilog
+* Debugging using waveform analysis
+
+---
+
+## Future Work
+
+Although SAP-1 is complete, this serves as a base for more advanced designs:
+
+* Adding flags (Zero, Carry, etc.)
+* Conditional branching
+* Expanding instruction set
+* Moving toward a more practical CPU architecture
+* Transition into **Design Verification (DV)** workflows
 
 ---
 
 ## License
 
-This project is primarily educational. Feel free to explore, modify, or use the code for learning purposes.
+This project is educational and open for learning purposes.
+Feel free to explore, modify, and build upon it.
