@@ -51,7 +51,7 @@ run: build
 
 wave: run
 	@echo "Launching GTKWave for $(TOP)..."
-	@wsl -d Arch gtkwave /mnt/c/Users/Kurama/Desktop/VLSI/8-bit-SAP1/$(SIM_DIR)/$(TOP).vcd
+	@gtkwave $(SIM_DIR)/$(TOP).vcd
 
 # ==========================
 # Batch Simulation
