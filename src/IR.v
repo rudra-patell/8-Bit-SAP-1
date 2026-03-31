@@ -2,8 +2,7 @@ module IR(
     input wire [7:0] bus_in,    // Input from the shared W-Bus
     input wire clk,
     input wire reset,
-    input wire load,           
-    input wire en_out_IR,      
+    input wire load,             
     output wire [7:0] bus_out,  // The W-Bus connection
     output wire [7:0] out_to_cu // Direct wire to Control Unit
 );
@@ -18,7 +17,7 @@ module IR(
     end
 
     // The upper 4 bits are typically masked or sent as 0s
-    assign bus_out = (en_out_IR) ? {4'b0000, ir_reg[3:0]} : 8'bz;
+    assign bus_out ={4'b0000, ir_reg[3:0]}; // Output to W-Bus (lower 4 bits of IR)
 
     assign out_to_cu = ir_reg;
 

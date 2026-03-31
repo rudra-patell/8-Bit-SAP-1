@@ -3,7 +3,6 @@ module RAM (
     input wire [7:0] data_in,
     input wire [3:0] address,      // From MAR
     input wire write_enable,       // From Controller
-    input wire chipsel_enable,     // From Controller
     output wire [7:0] data_out 
 );
 
@@ -13,7 +12,7 @@ module RAM (
     initial begin
 
         //Load from BIOS.txt
-        $readmemh("src/BIOS.txt", memory);
+        $readmemh("BIOS.txt", memory);
 
         // //Hard-coded values (Backup in case file fails)
         // memory[0]  = 8'h8A; // LDA 10
@@ -34,6 +33,6 @@ module RAM (
     end
 
     // TRUE Tri-state output to Bus
-    assign data_out = (chipsel_enable) ? memory[address] : 8'bz;
+    assign data_out = memory[address];
 
 endmodule

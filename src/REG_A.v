@@ -2,7 +2,7 @@ module REG_A (
     input clk,
     input clr,
     input load,
-    input en_out,
+    input en_out, // Enable output to alu
     input [7:0] data_in,
     output [7:0] data_out
 );

@@ -2,7 +2,6 @@
 module ALU (input [7:0] A, B, //8-bit inputs
             input [2:0] sel, //3-bit selector for operation
             output wire[7:0] data_out, //result of the ALU operation
-            input en_out,
             input rst, //reset signal for the ALU
             output reg[3:0] flags //flags will be implemented in future (oreder = Negative(Z), Zero(Z), Carry(C), Overflow(V))
             );
@@ -30,6 +29,5 @@ always @(*) begin
    
     //flags = 4'bXXXX; //flags will be implemented in future
 end
-    assign data_out = en_out ? result : 8'bz; //Output result to bus when enabled, otherwise high impedance
-    
+    assign data_out = result;
 endmodule

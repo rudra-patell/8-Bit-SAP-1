@@ -51,7 +51,7 @@ run: build
 
 wave: run
 	@echo "Launching GTKWave for $(TOP)..."
-	@gtkwav $(SIM_DIR)/$(TOP).vcd
+	@gtkwave $(SIM_DIR)/$(TOP).vcd
 
 # ==========================
 # Batch Simulation

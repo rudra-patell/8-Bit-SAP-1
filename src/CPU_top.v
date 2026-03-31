@@ -6,7 +6,7 @@ module CPU_top (
 );
 
     //W-Bus
-    wire [7:0] w_bus;
+    reg [7:0] w_bus;
 
     wire load_A, load_B, load_out, load_IR, load_MAR, load_PC; //all load pins
     wire en_out_A, en_out_B, en_out_PC, en_out_IR, en_out_alu;      //all enable pins
@@ -14,6 +14,20 @@ module CPU_top (
     wire [2:0] alu_op; //op code for alu operations
     wire [7:0] ir_to_cu, a_to_alu, b_to_alu, a_to_out; // Internal buses for control signals and data paths
     wire [3:0] ram_addr; // Address bus for RAM from mar
+    wire [7:0] PC_out , RAM_out , IR_out, ALU_out; // output of modules 
+    wire idle ; //bus idle flag
+    assign idle = ~(en_out_PC | en_out_alu | CS_RAM | en_out_IR) ;
+
+
+    always@ (*) begin //enableing priority encoder logic    
+        if(en_out_PC)           w_bus = PC_out;
+        else if (CS_RAM)        w_bus = RAM_out;
+        else if (en_out_IR)     w_bus = IR_out;
+        else if (en_out_alu)    w_bus = ALU_out;
+        else                    w_bus = 8'b0;   // idle bus 
+    end
+
+   
 
 
     Control CU(
@@ -41,10 +55,9 @@ module CPU_top (
     PC program_counter (
         .clk(clk),
         .rst(reset),
-        .EN(en_out_PC), 
         .inc(inc_PC),
         .load(load_PC),
-        .bus(w_bus)
+        .bus(PC_out)
     );
 
     MAR addr_reg (
@@ -58,9 +71,8 @@ module CPU_top (
         .clk(clk),
         .address(ram_addr),    // Driven by MAR
         .data_in(w_bus),       // For STA instructions
-        .data_out(w_bus),      // Drives the bus during T3 and T5
-        .write_enable(WE_RAM), 
-        .chipsel_enable(CS_RAM)
+        .data_out(RAM_out),      //Drives the bus during T3 and T5
+        .write_enable(WE_RAM)
     );
 
     IR instr_reg(
@@ -68,8 +80,7 @@ module CPU_top (
         .clk(clk),
         .reset(reset),
         .load(load_IR),
-        .en_out_IR(en_out_IR),
-        .bus_out(w_bus),
+        .bus_out(IR_out),
         .out_to_cu(ir_to_cu)
     );
 
@@ -95,9 +106,8 @@ module CPU_top (
         .A(a_to_alu),
         .B(b_to_alu),
         .sel(alu_op),
-        .data_out(w_bus),
-        .rst(reset),
-        .en_out(en_out_alu)
+        .data_out(ALU_out),
+        .rst(reset)
     );
 
     Output_Reg out_reg(
